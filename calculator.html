@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/pro.css">
+  <script defer src="assets/pro.js"></script>
+
+  <meta charset="UTF-8">
+  <title>Fee Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    const courses = {
+      "first-aid": 4800,
+      "sewing": 4500,
+      "landscaping": 5200,
+      "life-skills": 4000,
+      "cooking": 2200,
+      "child-minding": 2500,
+      "garden-maintenance": 2100
+    };
+
+    function calculateTotal() {
+      let selected = document.querySelectorAll('input[type=checkbox]:checked');
+      let subtotal = 0;
+      selected.forEach(c => subtotal += courses[c.value]);
+      let discount = 0;
+      if (selected.length === 2) discount = subtotal * 0.05;
+      if (selected.length === 3) discount = subtotal * 0.10;
+      if (selected.length >= 4) discount = subtotal * 0.15;
+      let afterDiscount = subtotal - discount;
+      let vat = afterDiscount * 0.15;
+      let total = afterDiscount + vat;
+      document.getElementById("output").innerHTML =
+        `Subtotal: R${subtotal}<br>
+        Discount: R${discount}<br>
+        VAT: R${vat}<br>
+        <strong>Total: R${total}</strong>`;
+    }
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="navbar container">
+    <a class="brand" href="index.html"><img class="logo" src="assets/logo.png" alt="Be Better Logo" style="height:100px; width: 100px;"> Empowering the Nation</a>
+    <button class="btn nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions"><a class="btn secondary" href="courses.html">Get Started</a></div>
+  </div>
+</header>
+
+<main>
+  <form>
+    <label><input type="checkbox" value="first-aid"> First Aid (R4800)</label><br>
+    <label><input type="checkbox" value="sewing"> Sewing (R4500)</label><br>
+    <label><input type="checkbox" value="landscaping"> Landscaping (R5200)</label><br>
+    <label><input type="checkbox" value="life-skills"> Life Skills (R4000)</label><br>
+    <label><input type="checkbox" value="cooking"> Cooking (R2200)</label><br>
+    <label><input type="checkbox" value="child-minding"> Child Minding (R2500)</label><br>
+    <label><input type="checkbox" value="garden-maintenance"> Garden Maintenance (R2100)</label><br>
+  </form>
+  <button onclick="calculateTotal()">Calculate</button>
+  <div id="output"></div>
+</main><footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2025 Empowering the Nation • Building skills for a brighter future</p>
+  </div>
+</footer>
+
+</body>
+</html>
