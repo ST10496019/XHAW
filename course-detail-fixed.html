@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/pro.css">
+  <script defer src="assets/pro.js"></script>
+  <meta charset="UTF-8">
+  <title>Course Detail - Empowering the Nation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="navbar container">
+    <a class="brand" href="index.html"><img class="logo" src="assets/logo.png" alt="Be Better Logo" style="height:100px; width: 100px;"> Empowering the Nation</a>
+    <button class="btn nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions"><a class="btn secondary" href="courses.html">Get Started</a></div>
+  </div>
+</header>
+
+<main class="container">
+  <a href="courses.html">← Back to courses</a>
+  <section id="course-detail" style="margin-top:18px;">
+    <h1 id="course-title">Course</h1>
+    <p id="course-summary" class="lead"></p>
+    <div id="course-meta">
+      <p><strong>Duration:</strong> <span id="course-duration"></span></p>
+      <p><strong>Fee:</strong> <span id="course-fee"></span></p>
+    </div>
+    <div id="course-description"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2025 Empowering the Nation • Building skills for a brighter future</p>
+  </div>
+</footer>
+
+<script>
+  // Minimal client-side routing: read ?id= and render details
+  const courses = {
+    'first-aid': {
+      title: 'First Aid',
+      summary: 'Basic first aid skills for home and workplace safety.',
+      duration: '6 months',
+      fee: 'R 1,200',
+      description: '<p>Learn CPR, wound care, burns management, and emergency response. Practical sessions included.</p>'
+    },
+    'sewing': {
+      title: 'Sewing',
+      summary: 'Practical sewing and garment repairs for new earners.',
+      duration: '6 months',
+      fee: 'R 900',
+      description: '<p>Covers basics of machine use, hand-stitching, pattern reading and simple alterations.</p>'
+    },
+    'landscaping': {
+      title: 'Landscaping',
+      summary: 'Garden maintenance and basic landscaping skills.',
+      duration: '6 months',
+      fee: 'R 1,000',
+      description: '<p>Planting, pruning, lawn care, and safe use of garden tools.</p>'
+    },
+    'life-skills': {
+      title: 'Life Skills',
+      summary: 'Communication, budgeting and basic job-readiness training.',
+      duration: '6 months',
+      fee: 'R 700',
+      description: '<p>Topics include time management, workplace behaviour and basic numeracy.</p>'
+    },
+    'cooking': {
+      title: 'Cooking',
+      summary: 'Fundamentals of home cooking and safe food handling.',
+      duration: '6 weeks',
+      fee: 'R 450',
+      description: '<p>Menu planning, basic recipes, and food hygiene.</p>'
+    },
+    'child-minding': {
+      title: 'Child Minding',
+      summary: 'Care for young children and basic child development.',
+      duration: '6 weeks',
+      fee: 'R 400',
+      description: '<p>Safe play, feeding routines, and early stimulation activities.</p>'
+    },
+    'garden-maintenance': {
+      title: 'Garden Maintenance',
+      summary: 'Short course covering garden upkeep for homeowners.',
+      duration: '6 weeks',
+      fee: 'R 350',
+      description: '<p>Weeding, mulching, and seasonal maintenance tips.</p>'
+    }
+  };
+
+  function renderCourse(id) {
+    const data = courses[id];
+    const titleEl = document.getElementById('course-title');
+    if (!data) {
+      titleEl.textContent = 'Course not found';
+      document.getElementById('course-summary').textContent = '';
+      document.getElementById('course-duration').textContent = '';
+      document.getElementById('course-fee').textContent = '';
+      document.getElementById('course-description').innerHTML = '<p>Please return to the <a href="courses.html">courses list</a>.</p>';
+      return;
+    }
+    titleEl.textContent = data.title;
+    document.getElementById('course-summary').textContent = data.summary;
+    document.getElementById('course-duration').textContent = data.duration;
+    document.getElementById('course-fee').textContent = data.fee;
+    document.getElementById('course-description').innerHTML = data.description;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || 'first-aid';
+  renderCourse(id);
+</script>
+
+</body>
+</html>
